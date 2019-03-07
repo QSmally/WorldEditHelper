@@ -31,8 +31,10 @@ public class WorldEditHelper extends JavaPlugin implements Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(!(sender instanceof Player)) return true;
-        if(cmd.getName().equals("hidehelper"))
+        if(cmd.getName().equals("hidehelper")) {
             hideHelper((Player) sender);
+            ((Player) sender).performCommand("/desel");
+        }
         return true;
     }
 
