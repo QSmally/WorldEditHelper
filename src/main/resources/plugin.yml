@@ -1,0 +1,9 @@
+name: WorldEditHelper
+version: 1.0
+depend: [WorldEdit]
+main: org.stonecipher.WorldEditHelper
+api-version: 1.13
+commands:
+  hidehelper:
+    description: Hides the helper until it is reinitialized
+    usage: /hidehelper
