@@ -60,48 +60,45 @@ public class WorldEditHelper extends JavaPlugin implements Listener {
     private void setPlayerSelection(Player p) {
         LocalSession session = worldEdit.getSession(p);
         try {
+
+            if (!session.isSelectionDefined(session.getSelectionWorld())) return;
+
             Region region = session.getSelection(session.getSelectionWorld());
             BlockVector3 bvMax = region.getMaximumPoint();
             BlockVector3 bvMin = region.getMinimumPoint();
 
-            int xMax = bvMax.getBlockX();
-            int xMin = bvMin.getBlockX();
-            int yMax = bvMax.getBlockY();
-            int yMin = bvMin.getBlockY();
-            int zMax = bvMax.getBlockZ();
-            int zMin = bvMin.getBlockZ();
-            int volume = region.getArea();
-
             ScoreboardManager manager = Bukkit.getScoreboardManager();
             Scoreboard board = manager.getNewScoreboard();
-            Objective objective = board.registerNewObjective("test", "dummy");
+            Objective objective = board.registerNewObjective(p.getDisplayName() + "weh", "dummy");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
             objective.setDisplayName(ChatColor.RED + "Current Selection");
 
             addLineToScoreboard(objective, 6, ChatColor.DARK_GREEN + "Position A:");
-            addLineToScoreboard(objective, 5, "   " + ChatColor.GRAY + xMax + ChatColor.WHITE + "," + ChatColor.GRAY + yMax + ChatColor.WHITE + "," + ChatColor.GRAY + zMax);
+            addLineToScoreboard(objective, 5, "   " + ChatColor.GRAY + bvMax.getBlockX() + ChatColor.WHITE + "," + ChatColor.GRAY + bvMax.getBlockY() + ChatColor.WHITE + "," + ChatColor.GRAY + bvMax.getBlockZ());
+
+            int volume = region.getArea();
 
             if (volume != 1) {
                 addLineToScoreboard(objective, 4, ChatColor.DARK_GREEN + "Position B:");
-                addLineToScoreboard(objective, 3, "   " + ChatColor.GRAY + xMin + ChatColor.WHITE + "," + ChatColor.GRAY + yMin + ChatColor.WHITE + "," + ChatColor.GRAY + zMin);
+                addLineToScoreboard(objective, 3, "   " + ChatColor.GRAY + bvMin.getBlockX() + ChatColor.WHITE + "," + ChatColor.GRAY + bvMin.getBlockY() + ChatColor.WHITE + "," + ChatColor.GRAY + bvMin.getBlockZ());
             }
 
             addLineToScoreboard(objective, 2, ChatColor.DARK_GREEN + "Volume:");
 
-            if (volume < 100000) {
+            if (volume < 100000)
                 addLineToScoreboard(objective, 1, "   " + ChatColor.GREEN + volume);
-            } else if (volume < 1000000) {
+            else if (volume < 1000000)
                 addLineToScoreboard(objective, 1, "   " + ChatColor.YELLOW + volume);
-            } else if (volume < 2000000) {
+            else if (volume < 2000000)
                 addLineToScoreboard(objective, 1, "   " + ChatColor.RED + volume);
-            } else {
+            else
                 addLineToScoreboard(objective, 1, "   " + ChatColor.DARK_RED + volume);
-            }
 
             p.setScoreboard(board);
-
         } catch (IncompleteRegionException exception) {
-            hideHelper(p);
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 
