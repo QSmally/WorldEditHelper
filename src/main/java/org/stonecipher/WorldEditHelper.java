@@ -41,8 +41,10 @@ public class WorldEditHelper extends JavaPlugin implements Listener {
     @EventHandler
     private void onClick(PlayerCommandPreprocessEvent e) {
         String[] tokens = e.getMessage().substring(1).split("\\s+");
-        if(!tokens[0].equals("hidehelper")) {
-            final Player p = e.getPlayer();
+        final Player p = e.getPlayer();
+        if (tokens[0].equals("/sel") || tokens[0].equals("/desel") || tokens[0].equals("/deselect")) {
+            hideHelper(p);
+        } else if(!tokens[0].equals("hidehelper")) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
