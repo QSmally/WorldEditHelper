@@ -61,7 +61,7 @@ public class WorldEditHelper extends JavaPlugin implements Listener {
 
     private void setPlayerSelection(Player p) {
         LocalSession session = worldEdit.getSession(p);
-        if (session == null) return;
+        if (session.getSelectionWorld() == null) return;
 
         try {
 
