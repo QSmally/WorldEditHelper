@@ -18,8 +18,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
 
+import java.util.Random;
+
 public class WorldEditHelper extends JavaPlugin implements Listener {
 
+    Random rand = new Random();
     WorldEditPlugin worldEdit = null;
 
     @Override
@@ -73,7 +76,7 @@ public class WorldEditHelper extends JavaPlugin implements Listener {
 
             ScoreboardManager manager = Bukkit.getScoreboardManager();
             Scoreboard board = manager.getNewScoreboard();
-            Objective objective = board.registerNewObjective(p.getDisplayName() + "weh", "dummy");
+            Objective objective = board.registerNewObjective(Integer.toString(rand.nextInt(1234567890)), "dummy");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
             objective.setDisplayName(ChatColor.RED + "Current Selection");
 
