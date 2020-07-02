@@ -89,18 +89,18 @@ public class WorldEditHelper extends JavaPlugin implements Listener {
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
             objective.setDisplayName(ChatColor.RED + "Current Selection");
 
-            addLineToScoreboard(objective, 6, ChatColor.GREEN + "Position A");
+            addLineToScoreboard(objective, 6, ChatColor.DARK_GREEN + "Position A");
             addLineToScoreboard(objective, 5, "   " + ChatColor.GRAY + bvMax.getBlockX() + ChatColor.WHITE + "," + ChatColor.GRAY + bvMax.getBlockY() + ChatColor.WHITE + "," + ChatColor.GRAY + bvMax.getBlockZ()); // This is a disgusting line
 
             int volume = region.getArea();
 
             if (volume != 1) {
-                addLineToScoreboard(objective, 4, ChatColor.GREEN + "Position B");
+                addLineToScoreboard(objective, 4, ChatColor.DARK_GREEN + "Position B");
                 addLineToScoreboard(objective, 3, "   " + ChatColor.GRAY + bvMin.getBlockX() + ChatColor.WHITE + "," + ChatColor.GRAY + bvMin.getBlockY() + ChatColor.WHITE + "," + ChatColor.GRAY + bvMin.getBlockZ());
             }
 
             var COLOR = ChatColor.GREEN;
-            addLineToScoreboard(objective, 2, COLOR + "Volume");
+            addLineToScoreboard(objective, 2, ChatColor.DARK_GREEN + "Volume");
 
             if (volume < 100000)        COLOR = ChatColor.GREEN;
             else if (volume < 1000000)  COLOR = ChatColor.YELLOW;
